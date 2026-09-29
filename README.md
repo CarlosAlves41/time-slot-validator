@@ -34,3 +34,10 @@ The start boundary is inclusive and the end boundary is exclusive, matching the 
 
 - `AvailabilityWindow` — a class describing a recurring window.
 - `TimeSlotValidator` — a class that validates a UTC instant against a list of windows.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
